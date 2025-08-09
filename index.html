@@ -122,7 +122,7 @@
     </select>
     <input type="number" id="priceInput" placeholder="Preis (Netto)" step="0.01">
 
-    <button class="btn-add" onclick="addUnit()">Eingaben speichern</button>
+    <button class="btn-add" onclick="addUnit()">Gebinde hinzufügen</button>
     <button class="btn-add" onclick="addMaterial()">Material berechnen</button>
 
     <div class="scrollable-table">
@@ -147,6 +147,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
   <script>
     const VAT_RATE = 1.19;
 
@@ -168,6 +169,9 @@
 
     if (!localStorage.getItem('unitOptions')) {
       localStorage.setItem('unitOptions', JSON.stringify(unitOptions));
+    }
+    if (!localStorage.getItem('materialOptions')) {
+      localStorage.setItem('materialOptions', JSON.stringify(materialOptions));
     }
 
     projectNameInput.value = projectName;
@@ -253,11 +257,8 @@
     function confirmReset() {
       if (confirm('Möchtest du wirklich ALLE Daten löschen?')) {
         localStorage.removeItem('materials');
-        localStorage.removeItem('materialOptions');
         localStorage.removeItem('projectName');
         materials = [];
-        materialOptions = [];
-        updateDropdown();
         renderTable();
         projectNameInput.value = '';
         totalDisplay.textContent = '0.00 €';
@@ -273,16 +274,31 @@
       doc.setFontSize(12);
       doc.text(`Jahr: ${(new Date()).getFullYear()}`, 10, 20);
 
-      let y = 30;
-      doc.text('Materialliste:', 10, y);
-      y += 10;
+      // Tabelle
+      const tableColumn = ["Material", "Menge", "Gebinde", "Netto (€)", "Brutto (€)"];
+      const tableRows = [];
 
       materials.forEach(mat => {
-        doc.text(`${mat.name} - ${mat.quantity} ${mat.unit} - Netto: ${mat.netto.toFixed(2)} € - Brutto: ${mat.brutto.toFixed(2)} €`, 10, y);
-        y += 10;
+        tableRows.push([
+          mat.name,
+          mat.quantity,
+          mat.unit,
+          mat.netto.toFixed(2),
+          mat.brutto.toFixed(2)
+        ]);
       });
 
-      doc.text(`Gesamtbetrag (Brutto): ${totalDisplay.textContent}`, 10, y + 10);
+      doc.autoTable({
+        head: [tableColumn],
+        body: tableRows,
+        startY: 30,
+        headStyles: { fillColor: [255, 245, 157], textColor: [245, 127, 23] },
+        styles: { fontSize: 11 }
+      });
+
+      const finalY = doc.lastAutoTable.finalY + 10;
+      doc.text(`Gesamtbetrag (Brutto): ${totalDisplay.textContent}`, 10, finalY);
+
       doc.save(`${projectNameInput.value || 'Bauprojekt'}_${(new Date()).getFullYear()}.pdf`);
     }
 
