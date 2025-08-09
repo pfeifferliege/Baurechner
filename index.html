@@ -1,321 +1,309 @@
-<!DOCTYPE html>  <html lang="de">  
-<head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Bauprojekt Rechner</title>  
-  <style>  
-    * {  
-      box-sizing: border-box;  
-    }  
-    body {  
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
-      margin: 0;  
-      padding: 1rem;  
-      background: linear-gradient(to right, #fffde7, #fff9c4);  
-      color: #333;  
-    }  
-    .container {  
-      max-width: 700px;  
-      margin: auto;  
-      background: #ffffff;  
-      padding: 2rem;  
-      border-radius: 20px;  
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);  
-    }  
-    h1, h2 {  
-      text-align: center;  
-      margin-bottom: 1.5rem;  
-      color: #f9a825;  
-    }  
-    label {  
-      font-weight: bold;  
-      margin-top: 1rem;  
-      color: #fbc02d;  
-      display: block;  
-    }  
-    input[type="text"],  
-    input[type="number"],  
-    select {  
-      padding: 0.9rem;  
-      font-size: 1rem;  
-      border-radius: 10px;  
-      border: 1px solid #bbb;  
-      width: 100%;  
-      background: #fffde7;  
-    }  
-    input:focus, select:focus {  
-      outline: none;  
-      border-color: #fdd835;  
-      background: #fffde7;  
-    }  
-    .material-row {  
-      display: flex;  
-      gap: 1rem;  
-      margin-bottom: 1rem;  
-    }  
-    .material-row > * {  
-      flex: 1;  
-    }  
-    .button-group {  
-      display: flex;  
-      flex-direction: column;  
-      align-items: center;  
-      gap: 0.5rem;  
-      margin-top: 1rem;  
-    }  
-    button {  
-      padding: 1rem;  
-      font-size: 1rem;  
-      border: none;  
-      border-radius: 10px;  
-      cursor: pointer;  
-      width: 80%;  
-      max-width: 300px;  
-      transition: background 0.3s ease;  
-    }  
-    button:hover {  
-      opacity: 0.9;  
-    }  
-    .btn-danger {  
-      background: #e53935;  
-      color: white;  
-    }  
-    .btn-pdf {  
-      background: #fdd835;  
-      color: black;  
-    }  
-    .btn-add {  
-      background: #fbc02d;  
-      color: white;  
-    }  
-    .scrollable-table {  
-      overflow-x: auto;  
-    }  
-    table {  
-      width: 100%;  
-      border-collapse: collapse;  
-      margin: 1.5rem 0;  
-      min-width: 600px;  
-    }  
-    th, td {  
-      border: 1px solid #ddd;  
-      padding: 0.75rem;  
-      font-size: 1rem;  
-    }  
-    th {  
-      background: #fff59d;  
-      color: #f57f17;  
-    }  
-    td {  
-      background: #fffde7;  
-    }  
-    #totalDisplay {  
-      color: #f57f17;  
-      font-weight: bold;  
-    }  
-  </style>  
-</head>  
-<body>  
-  <div class="container">  
-    <h1>Bauprojekt Rechner</h1>  <label for="projectName">Projektname & Jahr</label>  
-<input type="text" id="projectName" placeholder="z.B. Garage 2025">  
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bauprojekt Rechner</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 1rem;
+      background: linear-gradient(to right, #fffde7, #fff9c4);
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #f9a825;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      color: #fbc02d;
+      display: block;
+    }
+    input[type="text"],
+    input[type="number"],
+    select {
+      padding: 0.9rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #bbb;
+      width: 100%;
+      background: #fffde7;
+      margin-bottom: 1rem;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #fdd835;
+      background: #fffde7;
+    }
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    button {
+      padding: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .btn-danger {
+      background: #e53935;
+      color: white;
+    }
+    .btn-pdf {
+      background: #fdd835;
+      color: black;
+    }
+    .btn-add {
+      background: #fbc02d;
+      color: white;
+    }
+    .scrollable-table {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      min-width: 600px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+    th {
+      background: #fff59d;
+      color: #f57f17;
+    }
+    td {
+      background: #fffde7;
+    }
+    #totalDisplay {
+      color: #f57f17;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bauprojekt Rechner</h1>
 
-<h2>Material hinzufügen</h2>  
-<div class="material-row">  
-  <input type="text" id="materialInput" placeholder="Materialname">  
-  <input type="text" id="unitAddInput" placeholder="Neue Einheit hinzufügen">  
-</div>  
-<div class="material-row">  
-  <input type="number" id="priceInput" placeholder="Preis (Netto)" step="0.01">  
-  <select id="materialSelect"></select>  
-</div>  
-<div class="material-row">  
-  <input type="number" id="quantityInput" placeholder="Menge" min="0">  
-</div>  
-<div class="material-row">  
-  <select id="unitSelect"></select>  
-  <select id="amountSelect">  
-    <option value="einheit">pro Einheit</option>  
-    <option value="gesamt">gesamt</option>  
-  </select>  
-</div>  
-<div class="button-group">  
-  <button class="btn-add" onclick="addUnit()">Einheit hinzufügen</button>  
-  <button class="btn-add" onclick="addMaterial()">Material berechnen</button>  
-</div>  
+    <label for="projectName">Projektname & Jahr</label>
+    <input type="text" id="projectName" placeholder="z.B. Garage 2025">
 
-<div class="scrollable-table">  
-  <table id="materialsTable">  
-    <thead>  
-      <tr>  
-        <th>Material</th>  
-        <th>Menge</th>  
-        <th>Einheit</th>  
-        <th>Netto</th>  
-        <th>Brutto</th>  
-      </tr>  
-    </thead>  
-    <tbody></tbody>  
-  </table>  
-</div>  
+    <h2>Material hinzufügen</h2>
 
-<h2>Gesamtbetrag (Brutto): <span id="totalDisplay">0.00 €</span></h2>  
+    <input type="text" id="materialInput" placeholder="Materialname">
+    <input type="text" id="unitAddInput" placeholder="Neue Einheit hinzufügen">
+    <input type="number" id="priceInput" placeholder="Preis (Netto)" step="0.01">
+    <select id="materialSelect"></select>
+    <input type="number" id="quantityInput" placeholder="Menge" min="0">
+    <select id="unitSelect"></select>
+    <select id="amountSelect">
+      <option value="einheit">pro Einheit</option>
+      <option value="gesamt">gesamt</option>
+    </select>
 
-<div class="button-group">  
-  <button class="btn-danger" onclick="confirmReset()">Alle Daten löschen</button>  
-  <button class="btn-pdf" onclick="generatePDF()">Als PDF drucken</button>  
-</div>
+    <button class="btn-add" onclick="addUnit()">Einheit hinzufügen</button>
+    <button class="btn-add" onclick="addMaterial()">Material berechnen</button>
 
-  </div>    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>    <script>  
-    const VAT_RATE = 1.19;  
-  
-    const projectNameInput = document.getElementById('projectName');  
-    const materialInput = document.getElementById('materialInput');  
-    const priceInput = document.getElementById('priceInput');  
-    const quantityInput = document.getElementById('quantityInput');  
-    const materialSelect = document.getElementById('materialSelect');  
-    const unitSelect = document.getElementById('unitSelect');  
-    const amountSelect = document.getElementById('amountSelect');  
-    const totalDisplay = document.getElementById('totalDisplay');  
-    const materialsTableBody = document.querySelector('#materialsTable tbody');  
-    const unitAddInput = document.getElementById('unitAddInput');  
-  
-    let materials = JSON.parse(localStorage.getItem('materials') || '[]');  
-    let projectName = localStorage.getItem('projectName') || '';  
-    let materialOptions = JSON.parse(localStorage.getItem('materialOptions') || '[]');  
-    let unitOptions = JSON.parse(localStorage.getItem('unitOptions') || '[]') || ["Stk.", "L", "g", "kg"];  
-  
-    if (!localStorage.getItem('unitOptions')) {  
-      localStorage.setItem('unitOptions', JSON.stringify(unitOptions));  
-    }  
-  
-    projectNameInput.value = projectName;  
-    projectNameInput.addEventListener('input', () => {  
-      localStorage.setItem('projectName', projectNameInput.value);  
-    });  
-  
-    function updateDropdown() {  
-      materialSelect.innerHTML = '';  
-      materialOptions.forEach(opt => {  
-        const option = document.createElement('option');  
-        option.value = opt;  
-        option.textContent = opt;  
-        materialSelect.appendChild(option);  
-      });  
-  
-      unitSelect.innerHTML = '';  
-      unitOptions.forEach(opt => {  
-        const option = document.createElement('option');  
-        option.value = opt;  
-        option.textContent = opt;  
-        unitSelect.appendChild(option);  
-      });  
-    }  
-  
-    function saveMaterials() {  
-      localStorage.setItem('materials', JSON.stringify(materials));  
-    }  
-  
-    function addMaterial() {  
-      const name = materialInput.value || materialSelect.value;  
-      const price = parseFloat(priceInput.value);  
-      const quantity = parseFloat(quantityInput.value);  
-      const unit = unitSelect.value;  
-      const amountType = amountSelect.value;  
-  
-      if (!name || isNaN(price) || isNaN(quantity)) {  
-        alert('Bitte alle Felder korrekt ausfüllen.');  
-        return;  
-      }  
-  
-      if (!materialOptions.includes(name)) {  
-        materialOptions.push(name);  
-        localStorage.setItem('materialOptions', JSON.stringify(materialOptions));  
-        updateDropdown();  
-      }  
-  
-      let netto = 0;  
-      if (amountType === "einheit") {  
-        netto = price * quantity;  
-      } else if (amountType === "gesamt") {  
-        netto = price;  
-      }  
-  
-      const brutto = netto * VAT_RATE;  
-  
-      materials.push({ name, quantity, unit, netto, brutto });  
-      saveMaterials();  
-      renderTable();  
-      materialInput.value = '';  
-      priceInput.value = '';  
-      quantityInput.value = '';  
-    }  
-  
-    function renderTable() {  
-      materialsTableBody.innerHTML = '';  
-      let total = 0;  
-      materials.forEach(mat => {  
-        const tr = document.createElement('tr');  
-        tr.innerHTML = `  
-          <td>${mat.name}</td>  
-          <td>${mat.quantity}</td>  
-          <td>${mat.unit}</td>  
-          <td>${mat.netto.toFixed(2)} €</td>  
-          <td>${mat.brutto.toFixed(2)} €</td>  
-        `;  
-        materialsTableBody.appendChild(tr);  
-        total += mat.brutto;  
-      });  
-      totalDisplay.textContent = total.toFixed(2) + ' €';  
-    }  
-  
-    function confirmReset() {  
-      if (confirm('Möchtest du wirklich ALLE Daten löschen?')) {  
-        localStorage.removeItem('materials');  
-        localStorage.removeItem('materialOptions');  
-        localStorage.removeItem('projectName');  
-        materials = [];  
-        materialOptions = [];  
-        updateDropdown();  
-        renderTable();  
-        projectNameInput.value = '';  
-        totalDisplay.textContent = '0.00 €';  
-      }  
-    }  
-  
-    function generatePDF() {  
-      const { jsPDF } = window.jspdf;  
-      const doc = new jsPDF();  
-  
-      doc.setFontSize(16);  
-      doc.text(`Projekt: ${projectNameInput.value}`, 10, 10);  
-      doc.setFontSize(12);  
-      doc.text(`Jahr: ${(new Date()).getFullYear()}`, 10, 20);  
-  
-      let y = 30;  
-      doc.text('Materialliste:', 10, y);  
-      y += 10;  
-  
-      materials.forEach(mat => {  
-        doc.text(`${mat.name} - ${mat.quantity} ${mat.unit} - Netto: ${mat.netto.toFixed(2)} € - Brutto: ${mat.brutto.toFixed(2)} €`, 10, y);  
-        y += 10;  
-      });  
-  
-      doc.text(`Gesamtbetrag (Brutto): ${totalDisplay.textContent}`, 10, y + 10);  
-      doc.save(`${projectNameInput.value || 'Bauprojekt'}_${(new Date()).getFullYear()}.pdf`);  
-    }  
-  
-    function addUnit() {  
-      const newUnit = unitAddInput.value.trim();  
-      if (newUnit && !unitOptions.includes(newUnit)) {  
-        unitOptions.push(newUnit);  
-        localStorage.setItem('unitOptions', JSON.stringify(unitOptions));  
-        updateDropdown();  
-        unitAddInput.value = '';  
-      }  
-    }  
-  
-    updateDropdown();  
-    renderTable();  
-  </script>  </body>  
+    <div class="scrollable-table">
+      <table id="materialsTable">
+        <thead>
+          <tr>
+            <th>Material</th>
+            <th>Menge</th>
+            <th>Einheit</th>
+            <th>Netto</th>
+            <th>Brutto</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <h2>Gesamtbetrag (Brutto): <span id="totalDisplay">0.00 €</span></h2>
+
+    <button class="btn-danger" onclick="confirmReset()">Alle Daten löschen</button>
+    <button class="btn-pdf" onclick="generatePDF()">Als PDF drucken</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    const VAT_RATE = 1.19;
+
+    const projectNameInput = document.getElementById('projectName');
+    const materialInput = document.getElementById('materialInput');
+    const priceInput = document.getElementById('priceInput');
+    const quantityInput = document.getElementById('quantityInput');
+    const materialSelect = document.getElementById('materialSelect');
+    const unitSelect = document.getElementById('unitSelect');
+    const amountSelect = document.getElementById('amountSelect');
+    const totalDisplay = document.getElementById('totalDisplay');
+    const materialsTableBody = document.querySelector('#materialsTable tbody');
+    const unitAddInput = document.getElementById('unitAddInput');
+
+    let materials = JSON.parse(localStorage.getItem('materials') || '[]');
+    let projectName = localStorage.getItem('projectName') || '';
+    let materialOptions = JSON.parse(localStorage.getItem('materialOptions') || '[]');
+    let unitOptions = JSON.parse(localStorage.getItem('unitOptions') || '[]') || ["Stk.", "L", "g", "kg"];
+
+    if (!localStorage.getItem('unitOptions')) {
+      localStorage.setItem('unitOptions', JSON.stringify(unitOptions));
+    }
+
+    projectNameInput.value = projectName;
+    projectNameInput.addEventListener('input', () => {
+      localStorage.setItem('projectName', projectNameInput.value);
+    });
+
+    function updateDropdown() {
+      materialSelect.innerHTML = '';
+      materialOptions.forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt;
+        option.textContent = opt;
+        materialSelect.appendChild(option);
+      });
+
+      unitSelect.innerHTML = '';
+      unitOptions.forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt;
+        option.textContent = opt;
+        unitSelect.appendChild(option);
+      });
+    }
+
+    function saveMaterials() {
+      localStorage.setItem('materials', JSON.stringify(materials));
+    }
+
+    function addMaterial() {
+      const name = materialInput.value || materialSelect.value;
+      const price = parseFloat(priceInput.value);
+      const quantity = parseFloat(quantityInput.value);
+      const unit = unitSelect.value;
+      const amountType = amountSelect.value;
+
+      if (!name || isNaN(price) || isNaN(quantity)) {
+        alert('Bitte alle Felder korrekt ausfüllen.');
+        return;
+      }
+
+      if (!materialOptions.includes(name)) {
+        materialOptions.push(name);
+        localStorage.setItem('materialOptions', JSON.stringify(materialOptions));
+        updateDropdown();
+      }
+
+      let netto = 0;
+      if (amountType === "einheit") {
+        netto = price * quantity;
+      } else if (amountType === "gesamt") {
+        netto = price;
+      }
+
+      const brutto = netto * VAT_RATE;
+
+      materials.push({ name, quantity, unit, netto, brutto });
+      saveMaterials();
+      renderTable();
+      materialInput.value = '';
+      priceInput.value = '';
+      quantityInput.value = '';
+    }
+
+    function renderTable() {
+      materialsTableBody.innerHTML = '';
+      let total = 0;
+      materials.forEach(mat => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${mat.name}</td>
+          <td>${mat.quantity}</td>
+          <td>${mat.unit}</td>
+          <td>${mat.netto.toFixed(2)} €</td>
+          <td>${mat.brutto.toFixed(2)} €</td>
+        `;
+        materialsTableBody.appendChild(tr);
+        total += mat.brutto;
+      });
+      totalDisplay.textContent = total.toFixed(2) + ' €';
+    }
+
+    function confirmReset() {
+      if (confirm('Möchtest du wirklich ALLE Daten löschen?')) {
+        localStorage.removeItem('materials');
+        localStorage.removeItem('materialOptions');
+        localStorage.removeItem('projectName');
+        materials = [];
+        materialOptions = [];
+        updateDropdown();
+        renderTable();
+        projectNameInput.value = '';
+        totalDisplay.textContent = '0.00 €';
+      }
+    }
+
+    function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFontSize(16);
+      doc.text(`Projekt: ${projectNameInput.value}`, 10, 10);
+      doc.setFontSize(12);
+      doc.text(`Jahr: ${(new Date()).getFullYear()}`, 10, 20);
+
+      let y = 30;
+      doc.text('Materialliste:', 10, y);
+      y += 10;
+
+      materials.forEach(mat => {
+        doc.text(`${mat.name} - ${mat.quantity} ${mat.unit} - Netto: ${mat.netto.toFixed(2)} € - Brutto: ${mat.brutto.toFixed(2)} €`, 10, y);
+        y += 10;
+      });
+
+      doc.text(`Gesamtbetrag (Brutto): ${totalDisplay.textContent}`, 10, y + 10);
+      doc.save(`${projectNameInput.value || 'Bauprojekt'}_${(new Date()).getFullYear()}.pdf`);
+    }
+
+    function addUnit() {
+      const newUnit = unitAddInput.value.trim();
+      if (newUnit && !unitOptions.includes(newUnit)) {
+        unitOptions.push(newUnit);
+        localStorage.setItem('unitOptions', JSON.stringify(unitOptions));
+        updateDropdown();
+        unitAddInput.value = '';
+      }
+    }
+
+    updateDropdown();
+    renderTable();
+  </script>
+</body>
 </html>   
