@@ -50,13 +50,6 @@
       border-color: #fdd835;
       background: #fffde7;
     }
-    .button-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
     button {
       padding: 1rem;
       font-size: 1rem;
@@ -65,6 +58,7 @@
       cursor: pointer;
       width: 100%;
       transition: background 0.3s ease;
+      margin-bottom: 0.5rem;
     }
     button:hover {
       opacity: 0.9;
@@ -117,18 +111,18 @@
 
     <h2>Material hinzufügen</h2>
 
-    <input type="text" id="materialInput" placeholder="Materialname">
-    <input type="text" id="unitAddInput" placeholder="Neue Einheit hinzufügen">
-    <input type="number" id="priceInput" placeholder="Preis (Netto)" step="0.01">
+    <input type="text" id="materialInput" placeholder="Material hinzufügen">
     <select id="materialSelect"></select>
     <input type="number" id="quantityInput" placeholder="Menge" min="0">
     <select id="unitSelect"></select>
+    <input type="text" id="unitAddInput" placeholder="Gebinde hinzufügen">
     <select id="amountSelect">
-      <option value="einheit">pro Einheit</option>
+      <option value="einheit">pro Gebinde</option>
       <option value="gesamt">gesamt</option>
     </select>
+    <input type="number" id="priceInput" placeholder="Preis (Netto)" step="0.01">
 
-    <button class="btn-add" onclick="addUnit()">Einheit hinzufügen</button>
+    <button class="btn-add" onclick="addUnit()">Eingaben speichern</button>
     <button class="btn-add" onclick="addMaterial()">Material berechnen</button>
 
     <div class="scrollable-table">
@@ -137,7 +131,7 @@
           <tr>
             <th>Material</th>
             <th>Menge</th>
-            <th>Einheit</th>
+            <th>Gebinde</th>
             <th>Netto</th>
             <th>Brutto</th>
           </tr>
@@ -306,4 +300,4 @@
     renderTable();
   </script>
 </body>
-</html>   
+</html>
